@@ -1,0 +1,40 @@
+﻿@model WebAtividadeEntrevista.Models.BeneficiarioModel
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Beneficiários</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input type="text" id="nome-input" name="nome-input" class="form-control" placeholder="Nome">
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" id="cpf-input" name="cpf-input" class="form-control" placeholder="CPF">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-sm btn-success" onclick="adicionarBeneficiario()">Incluir</button>
+                        </div>
+                    </div>
+                </form>
+                <table class="table table-striped" id="table-modal">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

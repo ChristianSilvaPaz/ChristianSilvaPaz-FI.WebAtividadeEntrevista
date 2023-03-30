@@ -2,11 +2,45 @@
 @{
     ViewBag.Title = "Cadastrar Cliente";
 }
+
+@Html.Partial("Beneficiarios")
+
 @section scripts{
     <script>
         var urlPost = '@Url.Action("Incluir", "Cliente", new { area = "" })';
+        var clienteId = 0;
+
+        function abrirModal() {
+            $('#modal').modal('show');
+        }
+
+        function adicionarBeneficiario() {
+            var url = '@Url.Action("Incluir", "Beneficiario", new { area = "" })';
+
+            const nome = $('#nome-input').val();
+            const cpf = $('#cpf-input').val();
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { nome: nome, cpf: cpf, clienteId: clienteId },
+
+                success: function () {
+                    $('#table-modal').append(`'<tr><td>${nome}</td><td>${cpf}</td></tr>'`);
+
+                    $('#nome-input').val("");
+                    $('#cpf-input').val("");
+                },
+                error: function (data) {
+
+                    console.log('Error' + data);
+                }
+            });
+        }
     </script>
-    @Scripts.Render("~/bundles/clientes")
+    @Scripts.Render("~/Scripts/Clientes/clientes2.js")
 }
 <h2>@Html.Raw(ViewBag.Title)</h2>
+
 @Html.Partial("Forms")
+
