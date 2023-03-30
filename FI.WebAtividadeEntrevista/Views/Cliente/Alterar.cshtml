@@ -1,4 +1,4 @@
-﻿@model WebAtividadeEntrevista.Models.ClienteModel
+﻿@model WebAtividadeEntrevista.Models.ClienteViewModel
 @{
     ViewBag.Title = "Alterar Cliente";
 }
@@ -12,9 +12,12 @@
         var urlRetorno = '@Url.Action("Index", "Cliente", new { area = "" })';
 
         function abrirModal() {
+            obj.beneficiarios.forEach(b => {
+                $('#table-modal').append(`'<tr><td>${b.Nome}</td><td>${b.CPF}</td><td><button type="button" class="btn btn-primary btn-sm">Alterar</button> </td> <td> <button type="button" class="btn btn-danger btn-sm" onclick="excluir()">Excluir</button></td></tr>'`);
+            })
             $('#modal').modal('show');
-
         }
+
     </script>
     @Scripts.Render("~/bundles/altClientes")
 }

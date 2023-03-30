@@ -14,6 +14,6 @@ namespace WebAtividadeEntrevista.Models
 
         [Required]
         [CpfValidation(ErrorMessage = "Digite um CPF válido")]
-        public string Cpf { get; set; } = "10572488602";
+        public string Cpf { get; set; }
     }
 }

@@ -107,11 +107,11 @@ namespace WebAtividadeEntrevista.Controllers
 
             List<Beneficiario> beneficiarios = boBeneficiario.ListarPorIdCliente(id);
 
-            Models.ClienteModel model = null;
+            Models.ClienteViewModel model = null;
 
             if (cliente != null)
             {
-                model = new ClienteModel()
+                model = new ClienteViewModel()
                 {
                     Id = cliente.Id,
                     CEP = cliente.CEP,
@@ -124,6 +124,7 @@ namespace WebAtividadeEntrevista.Controllers
                     Sobrenome = cliente.Sobrenome,
                     Telefone = cliente.Telefone,
                     Cpf = cliente.CPF,
+                    beneficiarios = beneficiarios,
                 };
 
 
