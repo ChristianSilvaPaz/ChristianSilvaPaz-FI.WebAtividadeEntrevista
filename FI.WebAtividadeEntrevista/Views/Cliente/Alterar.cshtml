@@ -2,12 +2,20 @@
 @{
     ViewBag.Title = "Alterar Cliente";
 }
+
+@Html.Partial("Beneficiarios")
+
 @section scripts{
-<script>
+    <script>
         var urlPost = '@Url.Action("Alterar", "Cliente", new { area = "" })';
         var obj = @Html.Raw(Json.Encode(Model));
         var urlRetorno = '@Url.Action("Index", "Cliente", new { area = "" })';
-</script>
+
+        function abrirModal() {
+            $('#modal').modal('show');
+
+        }
+    </script>
     @Scripts.Render("~/bundles/altClientes")
 }
 <h2>@Html.Raw(ViewBag.Title)</h2>

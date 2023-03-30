@@ -1,4 +1,6 @@
-﻿namespace FI.AtividadeEntrevista.BLL
+﻿using System.Collections.Generic;
+
+namespace FI.AtividadeEntrevista.BLL
 {
     public class BoBeneficiario
     {
@@ -12,6 +14,12 @@
         {
             DAL.DaoBeneficiario ben = new DAL.DaoBeneficiario();
             return ben.VerificarExistencia(CPF);
+        }
+
+        public List<DML.Beneficiario> ListarPorIdCliente(long idCliente)
+        {
+            DAL.DaoBeneficiario ben = new DAL.DaoBeneficiario();
+            return ben.ListarPorIdCliente(idCliente);
         }
     }
 }

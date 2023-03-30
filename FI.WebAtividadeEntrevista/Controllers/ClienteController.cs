@@ -101,7 +101,12 @@ namespace WebAtividadeEntrevista.Controllers
         public ActionResult Alterar(long id)
         {
             BoCliente bo = new BoCliente();
+            BoBeneficiario boBeneficiario= new BoBeneficiario();
+
             Cliente cliente = bo.Consultar(id);
+
+            List<Beneficiario> beneficiarios = boBeneficiario.ListarPorIdCliente(id);
+
             Models.ClienteModel model = null;
 
             if (cliente != null)
@@ -117,7 +122,8 @@ namespace WebAtividadeEntrevista.Controllers
                     Nacionalidade = cliente.Nacionalidade,
                     Nome = cliente.Nome,
                     Sobrenome = cliente.Sobrenome,
-                    Telefone = cliente.Telefone
+                    Telefone = cliente.Telefone,
+                    Cpf = cliente.CPF,
                 };
 
 
