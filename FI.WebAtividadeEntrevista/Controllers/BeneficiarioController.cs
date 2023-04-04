@@ -46,5 +46,13 @@ namespace WebAtividadeEntrevista.Controllers
                 return Json("Cadastro efetuado com sucesso");
             }
         }
+
+        [HttpDelete]
+        public void Excluir(long Id)
+        {
+            BoBeneficiario boBeneficiario = new BoBeneficiario();
+
+            boBeneficiario.Excluir(Id);
+        }
     }
 }

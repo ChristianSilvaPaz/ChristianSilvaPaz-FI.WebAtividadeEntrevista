@@ -21,5 +21,11 @@ namespace FI.AtividadeEntrevista.BLL
             DAL.DaoBeneficiario ben = new DAL.DaoBeneficiario();
             return ben.ListarPorIdCliente(idCliente);
         }
+
+        public void Excluir(long id)
+        {
+            DAL.DaoBeneficiario ben = new DAL.DaoBeneficiario();
+            ben.Excluir(id);
+        }
     }
 }

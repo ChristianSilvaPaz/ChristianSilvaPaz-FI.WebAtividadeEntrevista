@@ -26,17 +26,38 @@
                 data: { nome: nome, cpf: cpf, clienteId: clienteId },
 
                 success: function () {
-                    $('#table-modal').append(`'<tr><td>${nome}</td><td>${cpf}</td><td><button type="button" class="btn btn-primary btn-sm">Alterar</button> </td> <td> <button type="button" class="btn btn-danger btn-sm">Excluir</button></td></tr>'`);
+                    $('#table-modal').append(`'<tr><td>${nome}</td><td>${cpf}</td><td><button type="button" class="btn btn-primary btn-sm">Alterar</button> </td> <td> <button type="button" class="btn btn-danger btn-sm" onclick="removerBeneficiario(this)">Excluir</button></td></tr>'`);
 
                     $('#nome-input').val("");
                     $('#cpf-input').val("");
+
+                    document.getElementById('btn-incluirOuAlterar').innerHTML = "Incluir";
                 },
                 error: function (data) {
-
                     console.log('Error' + data);
                 }
             });
         }
+
+        function preencherCampos(linha) {
+            document.getElementById('btn-incluirOuAlterar').innerHTML = "Alterar";
+
+            var i = linha.parentNode.parentNode.rowIndex;
+
+            const nome = document.getElementById('table-modal').rows[i].cells[0].innerText;
+            const cpf = document.getElementById('table-modal').rows[i].cells[1].innerText;
+
+            document.getElementById('nome-input').value = nome;
+            document.getElementById('cpf-input').value = cpf;
+
+            removerBeneficiario(linha);
+        }
+
+        function removerBeneficiario(linha) {
+            var i = linha.parentNode.parentNode.rowIndex;
+            document.getElementById('table-modal').deleteRow(i);
+        }  
+        
     </script>
     @Scripts.Render("~/Scripts/Clientes/clientes2.js")
 }

@@ -13,9 +13,66 @@
 
         function abrirModal() {
             obj.beneficiarios.forEach(b => {
-                $('#table-modal').append(`'<tr><td>${b.Nome}</td><td>${b.CPF}</td><td><button type="button" class="btn btn-primary btn-sm">Alterar</button> </td> <td> <button type="button" class="btn btn-danger btn-sm" onclick="excluir()">Excluir</button></td></tr>'`);
+                $('#table-modal').append(`'<tr><td>${b.Nome}</td><td>${b.CPF}</td><td><button type="button" class="btn btn-primary btn-sm" onclick="preencherCampos(this, ${b.Id})">Alterar</button> </td> <td> <button type="button" class="btn btn-danger btn-sm" onclick="removerBeneficiario(this, ${b.Id})">Excluir</button></td></tr>'`);
             })
             $('#modal').modal('show');
+        }
+
+        function preencherCampos(linha, id) {
+            document.getElementById('btn-incluirOuAlterar').innerHTML = "Alterar";
+
+            var i = linha.parentNode.parentNode.rowIndex;
+
+            const nome = document.getElementById('table-modal').rows[i].cells[0].innerText;
+            const cpf = document.getElementById('table-modal').rows[i].cells[1].innerText;
+
+            document.getElementById('nome-input').value = nome;
+            document.getElementById('cpf-input').value = cpf;
+
+            removerBeneficiario(linha, id);
+        }
+
+        function adicionarBeneficiario() {
+            var url = '@Url.Action("Incluir", "Beneficiario", new { area = "" })';
+
+            const nome = $('#nome-input').val();
+            const cpf = $('#cpf-input').val();
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { nome: nome, cpf: cpf, clienteId: obj.Id },
+
+                success: function () {
+                    $('#table-modal').append(`'<tr><td>${nome}</td><td>${cpf}</td><td><button type="button" class="btn btn-primary btn-sm">Alterar</button> </td> <td> <button type="button" class="btn btn-danger btn-sm" onclick="removerBeneficiario(this)">Excluir</button></td></tr>'`);
+
+                    $('#nome-input').val("");
+                    $('#cpf-input').val("");
+
+                    document.getElementById('btn-incluirOuAlterar').innerHTML = "Incluir";
+                },
+                error: function (data) {
+                    console.log('Error' + data);
+                }
+            });
+        }
+
+        function removerBeneficiario(linha, id) {
+            var url = '@Url.Action("Excluir", "Beneficiario", new { area = "" })';
+
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                data: { id: id },
+
+                success: function () {
+                    var i = linha.parentNode.parentNode.rowIndex;
+                    document.getElementById('table-modal').deleteRow(i);
+                },
+                error: function (data) {
+                    console.log('Error' + data);
+                }
+            });
         }
 
     </script>
